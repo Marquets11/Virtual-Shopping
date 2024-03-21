@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function Header() {
 	return (
-		<div className="bg-white">
+		<div className="bg-white fixed w-full z-10">
 			<nav className="flex flex-wrap gap-5 p-5 justify-end">
 				<button className="nav-button">
 					<Link to={"/"}>Home</Link>

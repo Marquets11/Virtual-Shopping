@@ -21,4 +21,7 @@
 	.nav-button {
 		@apply font-bold text-stone-600 hover:text-black border-b-2 border-transparent hover:border-black duration-200;
 	}
+	.size-radio-label {
+		@apply inline-flex justify-center w-7 h-7 bg-black text-gray-500 border border-transparent rounded-lg cursor-pointer peer-checked:border-white peer-checked:text-white hover:text-white hover:bg-stone-500 peer-checked:font-bold;
+	}
 }
