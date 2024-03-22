@@ -6,7 +6,7 @@ export default function Home() {
 	const products = useSelector(useProducts);
 
 	return (
-		<div className="bg-stone-800 min-h-screen py-12">
+		<div className="bg-stone-800 min-h-screen">
 			<div className="flex flex-wrap gap-5 p-5">
 				{products &&
 					products.map(({ name, image, id, price }) => (

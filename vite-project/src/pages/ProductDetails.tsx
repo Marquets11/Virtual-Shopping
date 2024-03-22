@@ -9,7 +9,7 @@ export default function ProductDetails() {
 	const productDetails = products.find(({ id }) => id === productId);
 
 	return (
-		<div className="bg-stone-800 h-screen py-14 flex justify-center md:items-center">
+		<div className="bg-stone-800 h-screen flex justify-center md:items-center">
 			{productDetails ? (
 				<CardProduct
 					key={productDetails.id}

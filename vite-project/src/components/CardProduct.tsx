@@ -7,7 +7,7 @@ export default function CardProduct(product: Products) {
 
 	return (
 		<>
-			<main className="p-5 flex gap-5 flex-wrap md:flex-nowrap">
+			<main className="px-5 py-10 flex flex-wrap md:p-5 md:gap-5 md:flex-nowrap">
 				<img
 					src={product.image}
 					alt={product.name}

@@ -24,4 +24,13 @@
 	.size-radio-label {
 		@apply inline-flex justify-center w-7 h-7 bg-black text-gray-500 border border-transparent rounded-lg cursor-pointer peer-checked:border-white peer-checked:text-white hover:text-white hover:bg-stone-500 peer-checked:font-bold;
 	}
+	.social-button {
+		@apply text-white font-extralight flex items-center gap-1;
+	}
+	.login-label-form {
+		@apply text-white bg-black rounded-l-md p-1 font-semibold;
+	}
+	.login-input-form {
+		@apply rounded-lg py-1 font-serif font-semibold w-full;
+	}
 }
