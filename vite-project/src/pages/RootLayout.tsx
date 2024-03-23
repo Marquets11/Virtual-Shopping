@@ -6,7 +6,7 @@ export default function RootLayout() {
 	return (
 		<div>
 			<Header />
-			<div className="h-16"></div>
+			<div className="h-24 sm:h-16"></div>
 			<Outlet />
 			<Footer />
 		</div>

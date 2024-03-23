@@ -34,6 +34,6 @@
 		@apply rounded-lg py-1 font-serif font-semibold w-full;
 	}
 	.menu-open {
-		@apply bg-white min-w-60 shadow-2xl shadow-black;
+		@apply bg-white min-w-60 sm:min-w-80 shadow-2xl shadow-black;
 	}
 }

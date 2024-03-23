@@ -8,8 +8,9 @@ export default function Header() {
 	const dispatch = useDispatch();
 
 	return (
-		<div className="bg-white fixed w-full z-10">
-			<nav className="flex flex-wrap gap-5 p-5 justify-end">
+		<div className="bg-white fixed w-full z-10 flex flex-wrap gap-5 justify-center sm:justify-between px-10 py-5">
+			<h1 className="text-2xl font-extralight">Virtual Shopping</h1>
+			<nav className="flex flex-wrap gap-5">
 				<button className="nav-button">
 					<Link to={"/"}>Home</Link>
 				</button>
@@ -22,9 +23,7 @@ export default function Header() {
 						Logout
 					</button>
 				)}
-				<button className="nav-button">
-					<Cart />
-				</button>
+				<Cart />
 			</nav>
 		</div>
 	);
