@@ -1,9 +1,16 @@
 import { useState } from "react";
 import { Products } from "../redux/products/slice";
 import SizeRadioButton from "./SizeRadioButton";
+import { useDispatch } from "react-redux";
+import { addProductToCart } from "../redux/cart/slice";
 
 export default function CardProduct(product: Products) {
 	const [enableCartButton, setEnableCartButton] = useState(true);
+	const dispatch = useDispatch();
+
+	const addProduct = () => {
+		dispatch(addProductToCart(product));
+	};
 
 	return (
 		<>
@@ -37,6 +44,7 @@ export default function CardProduct(product: Products) {
 
 					<button
 						disabled={enableCartButton}
+						onClick={() => addProduct()}
 						className="text-white font-bold bg-stone-900 py-1 md:py-3 px-3 w-full rounded-full enabled:hover:bg-black enabled:hover:ring-2 enabled:hover:ring-white"
 					>
 						Add to cart

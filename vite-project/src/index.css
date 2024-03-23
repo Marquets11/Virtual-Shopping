@@ -33,4 +33,7 @@
 	.login-input-form {
 		@apply rounded-lg py-1 font-serif font-semibold w-full;
 	}
+	.menu-open {
+		@apply bg-white min-w-60 shadow-2xl shadow-black;
+	}
 }

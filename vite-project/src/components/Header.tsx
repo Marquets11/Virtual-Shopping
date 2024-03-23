@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout, useUser } from "../redux/user/slice";
+import Cart from "./Cart";
 
 export default function Header() {
 	const user = useSelector(useUser);
 	const dispatch = useDispatch();
-	console.log(user);
 
 	return (
 		<div className="bg-white fixed w-full z-10">
@@ -23,7 +23,7 @@ export default function Header() {
 					</button>
 				)}
 				<button className="nav-button">
-					<Link to={"/cart"}>Cart</Link>
+					<Cart />
 				</button>
 			</nav>
 		</div>
