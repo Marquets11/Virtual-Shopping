@@ -22,7 +22,7 @@ export default function Cart() {
 	return (
 		<>
 			<button className="nav-button" onClick={() => setIsMenuOpen(() => true)}>
-				Cart{" "}
+				Cart
 				{cart.items &&
 					cart.items.length > 0 &&
 					`(${selectQuantityItemsInCart(cart)})`}
@@ -38,61 +38,24 @@ export default function Cart() {
 					className="w-full"
 					onClick={() => setIsMenuOpen((prev) => !prev)}
 				></div>
-				<section className="menu-open pt-2 pb-11 px-2 flex flex-col gap-5 relative overflow-auto">
-					<h2 className="text-2xl font-extrabold">Your Cart</h2>
-					{cart &&
-						cart.items &&
-						cart.items.map(({ product, quantity }) => (
-							// <div key={product.id} className="mx-auto flex flex-col">
-							// 	<div className="relative">
-							// 		<img
-							// 			src={product.image}
-							// 			alt={product.name}
-							// 			className="rounded-lg w-60 h-72 object-cover shadow-xl border-2 border-black"
-							// 		/>
-							// 		<button
-							// 			className="absolute right-2 top-2"
-							// 			onClick={() => dispatch(removeProductToCart(product))}
-							// 		>
-							// 			<RiDeleteBin5Fill />
-							// 		</button>
-							// 	</div>
-							// 	<div className="flex justify-around">
-							// 		<nav className="flex gap-2">
-							// 			<button
-							// 				disabled={quantity === 1 ? true : false}
-							// 				className={quantity === 1 ? "text-transparent" : ""}
-							// 				onClick={() =>
-							// 					dispatch(subProductToCart(product as Products))
-							// 				}
-							// 			>
-							// 				<FaMinus />
-							// 			</button>
-							// 			<p className="text-lg">{quantity}</p>
-							// 			<button
-							// 				onClick={() =>
-							// 					dispatch(addProductToCart(product as Products))
-							// 				}
-							// 			>
-							// 				<FaPlus />
-							// 			</button>
-							// 		</nav>
-							// 		<h3 className="font-bold text-xl">$ {product.price}</h3>
-							// 	</div>
-							// </div>
+				<section className="menu-open pt-2 pb-11 px-2 flex flex-col gap-2 overflow-auto">
+					<h2 className="text-2xl font-extrabold pb-2">Your Cart</h2>
+					{cart && cart.items && cart.items.length > 0 ? (
+						cart.items.map(({ product, quantity, size }) => (
 							<div
-								key={product.id}
-								className="border-2 border-black rounded-lg flex gap-4 relative"
+								key={product.id + size}
+								className="border-2 border-black rounded-lg flex gap-2 relative"
 							>
 								<img
 									src={product.image}
 									alt={product.name}
-									className="w-16 h-20 object-cover rounded-l-lg"
+									className="w-16 h-24 object-cover rounded-l-lg"
 								/>
 								<div className="flex flex-col justify-around w-full">
-									<h3 className="font-extralight text-sm sm:text-md">
+									<h3 className="font-extralight text-sm sm:text-md max-w-28 sm:max-w-44 overflow-hidden overflow-ellipsis">
 										{product.name}
 									</h3>
+									<p className="font-extrabold text-md">{size}</p>
 									<div className="flex justify-between pr-2">
 										<h4 className="font-semibold text-sm sm:text-lg">
 											$ {product.price}
@@ -102,7 +65,12 @@ export default function Cart() {
 												disabled={quantity === 1 ? true : false}
 												className={quantity === 1 ? "text-transparent" : ""}
 												onClick={() =>
-													dispatch(subProductToCart(product as Products))
+													dispatch(
+														subProductToCart({
+															product: product as Products,
+															size,
+														})
+													)
 												}
 											>
 												<FaMinus />
@@ -110,7 +78,12 @@ export default function Cart() {
 											<p className="text-md">{quantity}</p>
 											<button
 												onClick={() =>
-													dispatch(addProductToCart(product as Products))
+													dispatch(
+														addProductToCart({
+															product: product as Products,
+															size,
+														})
+													)
 												}
 											>
 												<FaPlus />
@@ -120,12 +93,18 @@ export default function Cart() {
 								</div>
 								<button
 									className="absolute right-2 top-2"
-									onClick={() => dispatch(removeProductToCart(product))}
+									onClick={() =>
+										dispatch(removeProductToCart({ product, size }))
+									}
 								>
-									<RiDeleteBin5Fill />
+									<RiDeleteBin5Fill className="text-red-900 hover:text-red-600" />
 								</button>
 							</div>
-						))}
+						))
+					) : (
+						<h3 className="m-auto font-semibold">Your Cart is empty</h3>
+					)}
+
 					{cart.items && cart.items.length > 0 && (
 						<footer className="py-2 px-1 fixed bg-black bottom-0 w-40 right-10 sm:w-60 rounded-t-lg">
 							<h3 className="font-bold text-center text-white">

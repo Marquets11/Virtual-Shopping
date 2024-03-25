@@ -5,6 +5,7 @@ export interface Cart {
 	items: {
 		product: Products;
 		quantity: number;
+		size: "P" | "M" | "G" | "XG";
 	}[];
 }
 
@@ -17,37 +18,58 @@ const cartSlice = createSlice({
 	initialState,
 	reducers: {
 		// Add a Product to the Cart
-		addProductToCart(state, { payload }: PayloadAction<Products>) {
+		addProductToCart(
+			state,
+			{
+				payload,
+			}: PayloadAction<{ product: Products; size: "P" | "M" | "G" | "XG" }>
+		) {
 			const itemAlreadyInCart = state.items.find(
-				(item) => item.product.id === payload.id
+				({ product, size }) =>
+					product.id === payload.product.id && size === payload.size
 			);
 
 			if (itemAlreadyInCart) {
 				return {
 					items: state.items.map((item) =>
-						item.product.id === payload.id
-							? { product: item.product, quantity: item.quantity + 1 }
+						item.product.id === payload.product.id && item.size === payload.size
+							? {
+									...item,
+									quantity: item.quantity + 1,
+									// product: item.product,
+									// size: item.size,
+							  }
 							: item
 					),
 				};
 			}
 
 			return {
-				items: [...state.items, { product: payload, quantity: 1 }],
+				items: [
+					...state.items,
+					{ product: payload.product, quantity: 1, size: payload.size },
+				],
 			};
 		},
 		//Subtract a Product in the Cart
-		subProductToCart(state, { payload }: PayloadAction<Products>) {
+		subProductToCart(
+			state,
+			{
+				payload,
+			}: PayloadAction<{ product: Products; size: "P" | "M" | "G" | "XG" }>
+		) {
 			const itemAlreadyInCart = state.items.find(
-				(item) => item.product.id === payload.id
+				({ product, size }) =>
+					product.id === payload.product.id && size === payload.size
 			);
 
 			if (itemAlreadyInCart) {
 				if (itemAlreadyInCart.quantity > 1) {
 					return {
 						items: state.items.map((item) =>
-							item.product.id === payload.id
-								? { product: item.product, quantity: item.quantity - 1 }
+							item.product.id === payload.product.id &&
+							item.size === payload.size
+								? { ...item, quantity: item.quantity - 1 }
 								: item
 						),
 					};
@@ -56,9 +78,17 @@ const cartSlice = createSlice({
 				removeProductToCart(payload);
 			}
 		},
-		removeProductToCart(state, { payload: { id } }: PayloadAction<Products>) {
+		removeProductToCart(
+			state,
+			{
+				payload,
+			}: PayloadAction<{ product: Products; size: "P" | "M" | "G" | "XG" }>
+		) {
 			return {
-				items: state.items.filter(({ product }) => product.id !== id),
+				items: state.items.filter(
+					({ product, size }) =>
+						product.id !== payload.product.id || size !== payload.size
+				),
 			};
 		},
 	},

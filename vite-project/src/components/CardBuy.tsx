@@ -16,7 +16,9 @@ export default function CardBuy(product: Products) {
 			</section>
 
 			<div className="flex justify-around">
-				<h3 className="font-extralight text-stone-400">{product.name}</h3>
+				<h3 className="font-extralight text-stone-400 w-36 overflow-ellipsis overflow-hidden">
+					{product.name}
+				</h3>
 				<p className="font-bold text-white">$ {product.price}</p>
 			</div>
 		</main>
