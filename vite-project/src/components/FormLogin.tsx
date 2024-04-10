@@ -4,8 +4,8 @@ import { login } from "../redux/user/slice";
 import { useNavigate } from "react-router-dom";
 
 export default function FormLogin() {
-	const emailRef = useRef(null);
-	const passwordRef = useRef(null);
+	const emailRef = useRef("");
+	const passwordRef = useRef("");
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
@@ -14,8 +14,8 @@ export default function FormLogin() {
 		if (emailRef.current && passwordRef.current) {
 			dispatch(
 				login({
-					email: emailRef.current.value,
-					password: passwordRef.current.value,
+					email: emailRef.current,
+					password: passwordRef.current,
 				})
 			);
 
@@ -37,7 +37,7 @@ export default function FormLogin() {
 						type="email"
 						className="login-input-form pl-12"
 						required
-						ref={emailRef}
+						onChange={(ev) => (emailRef.current = ev.target.value)}
 					/>
 				</div>
 				<div className="relative">
@@ -48,7 +48,7 @@ export default function FormLogin() {
 						type="password"
 						className="login-input-form pl-[5rem]"
 						required
-						ref={passwordRef}
+						onChange={(ev) => (passwordRef.current = ev.target.value)}
 					/>
 				</div>
 				<button className="rounded-full bg-stone-900 mx-auto py-1 px-6 text-white font-mono hover:bg-black hover:ring-1 hover:ring-white">
